@@ -1,19 +1,27 @@
 package com.microservices.accounts.controller;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.microservices.accounts.model.User;
+
 @RestController
-class accountsController {
+class AccountsController {
+    private List<User> users;
 
-    @GetMapping("hello")
-    public HashMap hello() {
-        HashMap<String, String> response = new HashMap<>();
+    @PostMapping("account/create")
+    public User createAccount(@RequestBody User request) {
+        System.out.println("Request: " + request);
 
-        response.put("name", "Rajeev");
+        return new User();
+    }
 
-        return response;
+    @GetMapping("accounts")
+    public List<User> hello() {
+        return this.users;
     }
 }
