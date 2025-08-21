@@ -5,6 +5,9 @@ import java.util.UUID;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Account {
@@ -17,6 +20,11 @@ public class Account {
     private String surname;
 
     private String insertions;
+
+    @OneToOne
+    @MapsId  
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Account setFirstname(String firstname) {
         this.firstname = firstname;
@@ -40,7 +48,6 @@ public class Account {
         return this.firstname;
     }
 
-
     public String getSurname() {
         return this.surname;
     }
@@ -49,9 +56,13 @@ public class Account {
         return this.insertions;
     }
 
+    public User getUser() {
+        return this.user;
+    }
+
     @Override
     public String toString() {
-        return "User{"
+        return "Account{"
                 + "userId=" + userId
                 + ", firstname='" + firstname + '\''
                 + ", insertions='" + insertions + '\''
