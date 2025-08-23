@@ -37,4 +37,8 @@ public class CreateAccountRequest extends JsonObject {
     public String getSurname() {
         return surname;
     }
+
+    public String getUsername() {
+        return username;
+    }
 }

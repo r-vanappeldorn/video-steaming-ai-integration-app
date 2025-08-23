@@ -2,6 +2,8 @@ package com.microservices.accounts.model;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -56,6 +58,7 @@ public class Account {
         return this.insertions;
     }
 
+    @JsonIgnore
     public User getUser() {
         return this.user;
     }

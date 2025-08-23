@@ -11,6 +11,22 @@ public class ApiResponse<T> extends JsonObject {
     private ErrorDetail error;
     private int statusCode;
 
+    public boolean getSuccess() {
+        return success;
+    }
+
+    public @Nullable T getData() {
+        return data;
+    }
+
+    public ErrorDetail getError() {
+        return error;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
     public static <T> ApiResponse<T> ok(T data) {
         ApiResponse<T> response = new ApiResponse<>();
         response.success = true;

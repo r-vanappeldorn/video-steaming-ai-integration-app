@@ -1,6 +1,7 @@
 package com.microservices.accounts.controller;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.regex.Pattern;
 
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import com.microservices.accounts.model.User;
 @RestController
 class AccountsController {
     private static final String PASSWORD_REGEX = "^(?=.*[^a-zA-Z0-9]).{12,}$";
+    private final List<User> users = new CopyOnWriteArrayList<>();
 
     private boolean isPasswordValid(String password) {
         boolean isValid = Pattern.compile(PASSWORD_REGEX).matcher(password).find();
@@ -25,9 +27,7 @@ class AccountsController {
         return isValid;
     }
 
-    private List<User> users;
-
-    @PostMapping("account/create")
+    @PostMapping("accounts/create")
     public ResponseEntity<ApiResponse> createAccount(@RequestBody CreateAccountRequest request) {
         if (!this.isPasswordValid(request.getPassword())) {
             ApiResponse<Void> errorResponse = ApiResponse.badRequest(
@@ -44,7 +44,10 @@ class AccountsController {
 
         User user = new User()
                 .setEmail(request.getEmail())
+                .setUsername(request.getUsername())
                 .setAccount(account);
+
+        System.out.println(user);
 
         this.users.add(user);
         ApiResponse<User> response = ApiResponse.ok(user);
