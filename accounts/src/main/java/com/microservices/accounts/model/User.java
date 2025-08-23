@@ -21,8 +21,8 @@ public class User {
 
     private String email;
 
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password_hash")
     private String passwordHash;
@@ -34,7 +34,7 @@ public class User {
     }
 
     public User setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
 
         return this;
     }
@@ -44,32 +44,38 @@ public class User {
 
         return this;
     }
+    
+    public User setAccount(Account account) {
+        this.account = account;
+
+        return this;
+    }
 
     public UUID getUserId() {
-        return this.userId;
+        return userId;
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public String getUserName() {
-        return this.userName;
+        return username;
     }
 
     public String getPasswordHash() {
-        return this.passwordHash;
+        return passwordHash;
     }
 
     public Account getAccount() {
-        return this.account;
+        return account;
     }
 
     @Override
     public String toString() {
         return "User{"
                 + "userId=" + userId
-                + ", userName='" + userName + '\''
+                + ", userName='" + username + '\''
                 + ", email='" + email + '\''
                 + ", passwordHash='" + passwordHash + '\''
                 + ", account='" + account.toString() + '\''
