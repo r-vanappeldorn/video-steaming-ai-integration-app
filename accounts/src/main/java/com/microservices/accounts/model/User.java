@@ -2,6 +2,8 @@ package com.microservices.accounts.model;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,7 +35,7 @@ public class User {
         return this;
     }
 
-    public User setUserName(String userName) {
+    public User setUsername(String userName) {
         this.username = userName;
 
         return this;
@@ -59,10 +61,11 @@ public class User {
         return email;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
 
+    @JsonIgnore
     public String getPasswordHash() {
         return passwordHash;
     }
