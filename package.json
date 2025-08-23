@@ -1,0 +1,25 @@
+{
+  "name": "spring-micro-services",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r-vanappeldorn/video-steaming-ai-integration-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/r-vanappeldorn/video-steaming-ai-integration-app/issues"
+  },
+  "homepage": "https://github.com/r-vanappeldorn/video-steaming-ai-integration-app#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "husky": "^9.1.7"
+  }
+}
