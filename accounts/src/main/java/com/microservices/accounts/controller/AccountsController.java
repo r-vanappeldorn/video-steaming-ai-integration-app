@@ -47,8 +47,6 @@ class AccountsController {
                 .setUsername(request.getUsername())
                 .setAccount(account);
 
-        System.out.println(user);
-
         this.users.add(user);
         ApiResponse<User> response = ApiResponse.ok(user);
         
