@@ -1,0 +1,42 @@
+name: commitlint
+
+on:
+  pull_request:
+    types: [opened, synchronize, edited, reopened]
+  push:
+    branches: ['**']
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install (only if devDeps are needed)
+        run: npm ci
+        if: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
+
+      - name: Lint commits in PR
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          npx commitlint --from "$BASE_SHA" --to "$HEAD_SHA"
+
+      - name: Lint commits on push
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          RANGE="$(git rev-list --no-merges --reverse ${{ github.sha }} ^${{ github.event.before }})"
+          if [ -z "$RANGE" ]; then
+            echo "No new commits to lint"; exit 0
+          fi
+          git log --format=%B ${{ github.event.before }}..${{ github.sha }} | npx commitlint
